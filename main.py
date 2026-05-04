@@ -35,3 +35,20 @@
 # ==========================================
 # Bloque 'if __name__ == "__main__":' para asegurar que el script
 # solo se ejecute si es el archivo principal.
+
+
+class Padre:
+    def __init__(self):
+        self.__x = 10
+
+class SensorBase:
+    def __init__(self):
+        self.__calibracion = 1.0
+
+    def factor(self):
+        return self.__calibracion
+    
+
+Hola = SensorBase().factor() + 10
+
+print(int(Hola))
