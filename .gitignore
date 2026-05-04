@@ -1,0 +1,17 @@
+# Archivos temporales de Python (Compilados)
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Entornos virtuales (Si usas venv)
+venv/
+env/
+ENV/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Archivo de resultados (Opcional)
+# Activa la siguiente línea si no quieres que tus puntajes personales se suban
+# resultados.txt
