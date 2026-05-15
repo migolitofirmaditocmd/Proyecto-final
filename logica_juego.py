@@ -54,3 +54,7 @@
 # - Recibe la preferencia del usuario (fácil/difícil).
 # - Crea una nueva lista que solo contenga las adivinanzas que coincidan con ese nivel.
 # - Retorna esa lista filtrada para que el juego comience.
+
+
+
+
