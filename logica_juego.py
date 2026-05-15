@@ -1,28 +1,60 @@
-"""
+# ==========================================
+# SECCIÓN 0: NOTAS DE ENTORNO Y REQUISITOS
+# ==========================================
+# 1. Asegurarse de tener activo el entorno virtual (venv).
+# 2. Verificar que la librería Turtle esté disponible (estándar en Python).
+# 3. Documentar versiones de Python compatibles (Recomendado: 3.10+)
 
-Responsabilidad: El 'cerebro' del juego y las reglas matemáticas.
-"""
+# ==========================================
+# SECCIÓN 1: PROCESAMIENTO DE RESPUESTAS
+# ==========================================
+# Función para "limpiar" la entrada del usuario:
+# - Convertir a minúsculas, eliminar espacios extra a los lados.
+# - Validar que la entrada no sea un campo vacío.
 
-def limpiar_texto(texto):
-    """Limpia el texto para una comparación justa (Sección 3.3 del flujo)"""
-    return texto.strip().lower()
+# ==========================================
+# SECCIÓN 2: VALIDACIÓN DE ACIERTOS
+# ==========================================
+# Función que recibe la respuesta del usuario y la respuesta correcta:
+# - Compara ambas cadenas de texto.
+# - Retorna un valor Booleano (True/False).
 
-def validar_respuesta(entrada_usuario, respuesta_correcta):
-    """Compara la respuesta procesada"""
-    return limpiar_texto(entrada_usuario) == limpiar_texto(respuesta_correcta)
 
-def gestionar_intentos(intentos_actuales):
-    """Resta intentos si el usuario falla (Sección 3.4 del flujo)"""
-    return intentos_actuales - 1
+# ==========================================
+# SECCIÓN 3: SISTEMA DE PUNTUACIÓN (Detallada)
+# ==========================================
+# Función 'calcular_puntos_ganados':
+# - Recibe: nivel (fácil/difícil) e intentos_restantes.
+# - Lógica: 
+#   - Si es Fácil: 10 puntos base.
+#   - Si es Difícil: 25 puntos base.
+#   - (Opcional) Bonus: Multiplicar puntos si acertó al primer intento.
+# - Retorna: El entero con los puntos obtenidos en esa ronda.
 
-def calcular_puntos(intentos_restantes, dificultad):
-    """
-    Sistema de cálculo de puntos: 
-    Más puntos por dificultad difícil y por acertar al primer intento.
-    """
-    base = 20 if dificultad.lower() == 'difícil' else 10
-    # Bonus por eficiencia (opcional, basado en tu descripción de lógica)
-    return base * (intentos_restantes + 1)
+# ==========================================
+# SECCIÓN 3.1: PENALIZACIÓN POR ERROR
+# ==========================================
+# Función 'aplicar_penalizacion':
+# - Si el usuario falla un intento en modo fácil, restar 2 puntos.
+# - Si el usuario falla en modo difícil, el puntaje de esa pregunta baja a 0 inmediatamente.
+# - Retorna: El nuevo valor de puntos posibles para esa pregunta.
+
+# ==========================================
+# SECCIÓN 4: GESTIÓN DE INTENTOS POR NIVEL
+# ==========================================
+# Función 'definir_limite_intentos':
+# - Recibe: nivel elegido.
+# - Retorna: 3 intentos para fácil, 1 o 2 intentos para difícil.
+
+# ==========================================
+# SECCIÓN 5: FILTRADO POR DIFICULTAD
+# ==========================================
+# Función 'obtener_preguntas_por_nivel':
+# - Recibe la lista completa de preguntas (desde gestion_datos).
+# - Recibe la preferencia del usuario (fácil/difícil).
+# - Crea una nueva lista que solo contenga las adivinanzas que coincidan con ese nivel.
+# - Retorna esa lista filtrada para que el juego comience.
+
 
 
 
