@@ -1,4 +1,6 @@
 import random
+import os
+import json
 
 # ==========================================
 # SECCIÓN 1: BANCO DE PREGUNTAS (Estructura de Datos)
@@ -129,7 +131,7 @@ preguntas_db = [
         "nivel": "medio"
     },
 
-    # ================= NIVEL DIFÍCIL (Adivinanzas que pediste) =================
+    # ================= NIVEL DIFÍCIL =================
     {
         "pregunta": "Hablo sin boca y oigo sin oídos. No tengo cuerpo, pero cobro vida con el viento. ¿Qué soy?",
         "opciones": ["El eco", "Una nube", "Un molino de viento", "Un silbato"],
@@ -196,51 +198,79 @@ preguntas_db = [
 # SECCIÓN 2: ESCRITURA DE RESULTADOS (Actualizada)
 # ==========================================
 
-def guardar_puntaje_final(nombre_jugador, puntaje_total, dificultad_jugada):
-    try:
-        with open("resultados.txt", "a", encoding="utf-8") as archivo:
-            linea = f"Jugador: {nombre_jugador} | Puntos: {puntaje_total} | Nivel: {dificultad_jugada}\n"
-            archivo.write(linea)
-    except Exception as e:
-        print(f"Error al guardar: {e}")
+def obtener_top_5_rankings():
+    """
+    Busca todas las sesiones guardadas en formato JSON,
+    extrae las fechas y puntajes,
+    y retorna las 5 mejores partidas.
+    """
 
-# ==========================================
-# SECCIÓN 3: LECTURA Y RANKING
-# ==========================================
+    lista_rankings = []
 
-def mostrar_ranking():
-    ranking = []
-    try:
-        with open("resultados.txt", "r", encoding="utf-8") as archivo:
-            for linea in archivo:
-                
-                partes = linea.strip().split(" | ")
-                if len(partes) == 3:
-                    nombre = partes[0].replace("Jugador: ", "")
-                    puntos = int(partes[1].replace("Puntos: ", ""))
-                    ranking.append({"nombre": nombre, "puntos": puntos})
-        
-        
-        ranking_ordenado = sorted(ranking, key=lambda x: x["puntos"], reverse=True)
-        
-        print("\n--- TOP 5 PUNTAJES ---")
-        for i, jugador in enumerate(ranking_ordenado[:5], 1):
-            print(f"{i}. {jugador['nombre']} - {jugador['puntos']} pts")
-            
-    except FileNotFoundError:
-        print("Aún no hay récords registrados.")
+    # LISTAR ARCHIVOS DE LA CARPETA
+    archivos = os.listdir(".")
 
-# ==========================================
-# SECCIÓN 4: SELECCIÓN ALEATORIA Y MEZCLA
-# ==========================================
+    for archivo in archivos:
+
+        # SOLO TOMAR ARCHIVOS DE SESIONES
+        if archivo.startswith("sesion_") and archivo.endswith(".json"):
+
+            try:
+
+                with open(archivo,"r",encoding="utf-8") as f:
+
+                    datos = json.load(f)
+
+                    fecha = datos.get("fecha_sesion","Fecha desconocida")
+
+                    puntaje = datos.get("puntaje_final",0)
+
+                    # GUARDAR DATOS
+                    datos_ranking = {
+                        "fecha": fecha,
+                        "puntaje": puntaje
+                    }
+
+                    lista_rankings.append(
+                        datos_ranking
+                    )
+
+            except Exception:
+
+                # SI UN ARCHIVO FALLA,
+                # EL PROGRAMA CONTINÚA
+                continue
+
+    # ORDENAR MANUALMENTE
+
+    # Ordenamos de mayor a menor puntaje
+    # usando un metodo sencillo tipo burbuja
+
+    cantidad = len(lista_rankings)
+
+    for i in range(cantidad):
+
+        for j in range(cantidad - 1):
+
+            puntaje_actual = lista_rankings[j]["puntaje"]
+
+            puntaje_siguiente = lista_rankings[j + 1]["puntaje"]
+            if puntaje_actual < puntaje_siguiente:
+
+                temporal = lista_rankings[j]
+
+                lista_rankings[j] = lista_rankings[j + 1]
+
+                lista_rankings[j + 1] = temporal
+    return lista_rankings[:5]
 
 def preparar_preguntas_del_juego(nivel_elegido):
-    
+
     preguntas_filtradas = [p for p in preguntas_db if p["nivel"] == nivel_elegido]
-    
+
     random.shuffle(preguntas_filtradas)
-    
+
     for p in preguntas_filtradas:
         random.shuffle(p["opciones"])
-        
+
     return preguntas_filtradas[:10]

@@ -1,0 +1,66 @@
+{
+    "fecha_sesion": "2026-05-16 17:25:13",
+    "puntaje_final": 60,
+    "detalle_preguntas": [
+        {
+            "dificultad": "fácil",
+            "pregunta": "Tengo dientes pero no muerdo. ¿Qué soy?",
+            "respuesta_correcta": "Un peine",
+            "respondio_correctamente": true
+        },
+        {
+            "dificultad": "fácil",
+            "pregunta": "Blanco por dentro, verde por fuera. Si quieres que te lo diga, espera. ¿Qué soy?",
+            "respuesta_correcta": "Pera",
+            "respondio_correctamente": false
+        },
+        {
+            "dificultad": "fácil",
+            "pregunta": "Te pertenece a ti, pero los demás lo usan mucho más que tú. ¿Qué soy?",
+            "respuesta_correcta": "Tu nombre",
+            "respondio_correctamente": false
+        },
+        {
+            "dificultad": "fácil",
+            "pregunta": "Tengo agujas y no sé coser, tengo números y no sé leer. ¿Qué soy?",
+            "respuesta_correcta": "Un reloj",
+            "respondio_correctamente": true
+        },
+        {
+            "dificultad": "fácil",
+            "pregunta": "Mientras más me quitas más crezco. ¿Qué soy?",
+            "respuesta_correcta": "Un hoyo",
+            "respondio_correctamente": true
+        },
+        {
+            "dificultad": "fácil",
+            "pregunta": "Tengo agujeros, pero simpre retengo el agua. ¿Qué soy?",
+            "respuesta_correcta": "Una esponja",
+            "respondio_correctamente": false
+        },
+        {
+            "dificultad": "fácil",
+            "pregunta": "Cuanto más seco, más mojada me quedo. ¿Qué soy?",
+            "respuesta_correcta": "Una toalla",
+            "respondio_correctamente": true
+        },
+        {
+            "dificultad": "fácil",
+            "pregunta": "Siempre subo, pero nunca bajo. ¿Qué soy?",
+            "respuesta_correcta": "La edad",
+            "respondio_correctamente": true
+        },
+        {
+            "dificultad": "fácil",
+            "pregunta": "Cuanto más le quitas, más grande se hace. ¿Qué soy?",
+            "respuesta_correcta": "Un agujero",
+            "respondio_correctamente": true
+        },
+        {
+            "dificultad": "fácil",
+            "pregunta": "Llevo mi casa al hombro, camino sin prisa y dejo un rastro de baba. ¿Qué soy?",
+            "respuesta_correcta": "Un caracol",
+            "respondio_correctamente": false
+        }
+    ]
+}

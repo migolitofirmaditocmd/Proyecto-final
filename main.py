@@ -1,54 +1,44 @@
-## ==========================================
-# SECCIÓN 1: IMPORTACIÓN DE MÓDULOS
-# ==========================================
-# Aquí se deben importar las funciones de:
-# - logica_juego.py (para procesar jugadas)
-# - gestion_datos.py (para cargar/guardar datos)
-# - interfaz_visual.py (para mostrar menús y Turtle)
+import gestion_datos
+import interfaz_visual
 
-# ==========================================
-# SECCIÓN 2: CONFIGURACIÓN INICIAL (Actualizada)
-# ==========================================
-# - Variable 'puntaje_total': Inicia en 0 al empezar cada partida.
-# - Variable 'nombre_usuario': Capturar el nombre para el registro final.
+def ejecutar_juego():
+    print("\nIniciando configuración de partida...")
+    # Ahora llamamos primero a la pantalla de dificultad
+    ventana_dificultad = interfaz_visual.InterfazDificultad()
+    return ventana_dificultad
 
-# ==========================================
-# SECCIÓN 3: BUCLE DE PREGUNTAS (Lógica de Sesión)
-# ==========================================
-# Por cada pregunta en la lista filtrada:
-# 1. Mostrar la pregunta al usuario.
-# 2. Iniciar bucle de intentos (según la dificultad).
-# 3. Si acierta: Llamar a la función de puntos y sumarlos a 'puntaje_total'.
-# 4. Si falla todos los intentos: Mostrar la respuesta correcta y continuar.
+def mostrar_ranking():
+    print("RANKING DE LAS 5 MEJORES SESIONES")
 
-# ==========================================
-# SECCIÓN 4: CONTROLADOR DE OPCIONES (Actualizado)
-# ==========================================
-# - Opción 'Jugar': 
-#   1. Llamar a la interfaz de selección de dificultad.
-#   2. Guardar la elección del usuario ('fácil' o 'difícil').
-#   3. Solicitar a 'logica_juego' el mazo de preguntas filtrado.
-#   4. Iniciar el bucle de preguntas basado en esa selección.
+    top_5 = gestion_datos.obtener_top_5_rankings()
 
-# ==========================================
-# SECCIÓN 5: EJECUCIÓN SEGURA
-# ==========================================
-# Bloque 'if __name__ == "__main__":' para asegurar que el script
-# solo se ejecute si es el archivo principal.
+    # Si no hay partidas jugadas todavía
+    if not top_5:
+        print("\n   Aún no hay registros de partidas guardadas.")
+        print("   ¡Juega una partida para inaugurar el podio!")
+    else:
 
+        posicion = 1
 
-class Padre:
-    def __init__(self):
-        self.__x = 10
+        for jugador in top_5:
 
-class SensorBase:
-    def __init__(self):
-        self.__calibracion = 1.0
+            fecha = jugador["fecha"]
+            puntaje = jugador["puntaje"]
 
-    def factor(self):
-        return self.__calibracion
-    
+            print(f"\n#{posicion}")
 
-Hola = SensorBase().factor() + 10
+            print("Fecha:")
+            print(fecha)
 
-print(int(Hola))
+            print("Puntaje:")
+            print(f"{puntaje} puntos")
+
+            print("----------------------")
+
+            posicion += 1
+
+    print("==============================\n")
+
+if __name__ == "__main__":
+    ejecutar_juego()
+    mostrar_ranking()
